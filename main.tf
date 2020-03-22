@@ -14,7 +14,7 @@ resource "aws_instance" "webserver" {
    vpc_security_group_ids = [
       aws_security_group.web.id,
       aws_security_group.ssh.id,
-      aws.security_group.ping.id,
+      aws_security_group.ping.id,
       aws_security_group.egress.id
    ] 
    key_name = aws_key_pair.demo_ssh_key.key_name
