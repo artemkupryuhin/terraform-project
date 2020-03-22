@@ -14,6 +14,7 @@ resource "aws_instance" "webserver" {
    vpc_security_group_ids = [
       aws_security_group.web.id,
       aws_security_group.ssh.id,
+      aws.security_groups.ping-icmp.id,
       aws_security_group.egress.id
    ] 
    key_name = aws_key_pair.demo_ssh_key.key_name
@@ -34,9 +35,10 @@ resource "aws_instance" "webserver" {
   }
 
    tags = {
-    Name ="webhost-${count.index +1}"
+    Name ="www-${count.index +1}"
+    Group = "WWW"
     Environment = "DEV"
-    OS = "Ubuntu Server"
+    OS = "Ubuntu"
   }
 }
 
@@ -78,6 +80,23 @@ resource "aws_security_group" "web" {
     Name = "sg-web"
   }
 }
+
+resource "aws_security_group" "ping-icmp" {
+  name        = "sgPingICMP"
+  description = "Default security group that allows to ping the instance"
+  
+  ingress {
+    from_port        = -1
+    to_port          = -1
+    protocol         = "icmp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+
+  tags = {
+    Name = "sg-ping-icmp"
+  }
+
+  }
 
 resource "aws_security_group" "egress" {
   name        = "sgEgreess"
