@@ -14,7 +14,7 @@ resource "aws_instance" "webserver" {
    vpc_security_group_ids = [
       aws_security_group.web.id,
       aws_security_group.ssh.id,
-      aws.security_groups.ping-icmp.id,
+      aws.security_groups.ping_icmp.id,
       aws_security_group.egress.id
    ] 
    key_name = aws_key_pair.demo_ssh_key.key_name
@@ -81,7 +81,7 @@ resource "aws_security_group" "web" {
   }
 }
 
-resource "aws_security_group" "ping-icmp" {
+resource "aws_security_group" "ping_icmp" {
   name        = "sgPingICMP"
   description = "Default security group that allows to ping the instance"
   
@@ -94,8 +94,7 @@ resource "aws_security_group" "ping-icmp" {
 
   tags = {
     Name = "sg-ping-icmp"
-  }
-
+   }
   }
 
 resource "aws_security_group" "egress" {
@@ -119,5 +118,4 @@ resource "null_resource" "webservers" {
   provisioner "local-exec" {
     command = "echo  'Hello World!'"
   }
-
 }
