@@ -122,10 +122,7 @@ resource "null_resource" "cluster" {
   
   provisioner "local-exec" {
 
-    command = <<EOT
-      sleep 30;
-      echo "Run Ansible playbook!!!!!";
-	  EOT
+    command = "ansible -i ec2.py all -u ${var.aws-user} -m ping"
 
   }
 }
