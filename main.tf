@@ -121,7 +121,7 @@ resource "null_resource" "cluster" {
   
   provisioner "local-exec" {
 
-    command = "ansible-playbook -i ec2.py all -u ${var.aws-user} nginx.yml"
+    command = "ansible-playbook -i ec2.py -u ${var.aws-user} nginx.yml"
 
   }
 }
