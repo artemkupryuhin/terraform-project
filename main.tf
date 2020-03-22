@@ -118,6 +118,6 @@ resource "null_resource" "cluster" {
     cluster_instance_ids = "${join(",", aws_instance.webserver.*.id)}"
   }
   provisioner "local-exec" {
-    command = "./ec2.py && ansible-playbook -u ${var.aws-user} nginx.yml"
+    command = "./ec2.py && sleep 30 && ansible-playbook -u ${var.aws-user} nginx.yml"
   }
 }
