@@ -114,8 +114,12 @@ resource "aws_security_group" "egress" {
   }
 }
 
-resource "null_resource" "webservers" {
-
+resource "null_resource" "cluster" {
+  
+  triggers = {
+    cluster_instance_ids = "${join(",", aws_instance.webserver.*.id)}"
+  }
+  
   provisioner "local-exec" {
     command = "echo  'Hello World!'"
   }
