@@ -1,1 +1,5 @@
 terraform.tfstate*
+.terraform/
+ansible.cfg
+ec2.py
+
