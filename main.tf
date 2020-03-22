@@ -1,6 +1,5 @@
 provider "aws" {
   region = var.aws-region
-  shared_credentials_file = var.aws-credential-file
 }
 
 resource "aws_key_pair" "demo_ssh_key" {
