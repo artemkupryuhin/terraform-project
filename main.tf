@@ -122,9 +122,10 @@ resource "null_resource" "cluster" {
   
   provisioner "local-exec" {
 
-   inline = [
-      "sleep 60",
-      "echo  'Hello World!'"
-    ]
+    command = <<EOT
+      sleep 30;
+      echo "Run Ansible playbook!!!!!";
+	  EOT
+
   }
 }
