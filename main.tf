@@ -19,25 +19,24 @@ resource "aws_instance" "webserver" {
    ] 
    key_name = aws_key_pair.demo_ssh_key.key_name
 
-  connection {
-    type        = "ssh"
-    host = self.public_ip
-    private_key = file(var.aws-ssh-key-private)
-    user        = var.aws-user
-  }
+  # connection {
+  #   type        = "ssh"
+  #   host = self.public_ip
+  #   private_key = file(var.aws-ssh-key-private)
+  #   user        = var.aws-user
+  # }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sleep 15 ",
-      "sudo apt update -y",
-      "sudo apt install nginx -y"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sleep 15 ",
+  #     "sudo apt update -y",
+  #     "sudo apt install nginx -y"
+  #   ]
+  # }
 
    tags = {
-    Name ="www-${count.index +1}"
+    Name ="www_${count.index +1}"
     Group = "WWW"
-    Environment = "DEV"
     OS = "Ubuntu"
   }
 }
