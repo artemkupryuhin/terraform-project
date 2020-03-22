@@ -14,7 +14,7 @@ resource "aws_instance" "webserver" {
    vpc_security_group_ids = [
       aws_security_group.web.id,
       aws_security_group.ssh.id,
-      aws.security_groups.ping_icmp.id,
+      aws.security_groups.ping.id,
       aws_security_group.egress.id
    ] 
    key_name = aws_key_pair.demo_ssh_key.key_name
@@ -81,8 +81,8 @@ resource "aws_security_group" "web" {
   }
 }
 
-resource "aws_security_group" "ping_icmp" {
-  name        = "sgPingICMP"
+resource "aws_security_group" "ping" {
+  name        = "sgPing"
   description = "Default security group that allows to ping the instance"
   
   ingress {
@@ -94,7 +94,7 @@ resource "aws_security_group" "ping_icmp" {
   }
   
   tags = {
-    Name = "sg-ping-icmp"
+    Name = "sg-ping"
    }
   }
 
