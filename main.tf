@@ -28,7 +28,7 @@ resource "aws_instance" "webserver" {
 
   provisioner "remote-exec" {
     inline = [
-      "sleep",
+      "sleep 15 ",
       "sudo apt update -y",
       "sudo apt install nginx -y"
     ]
@@ -121,6 +121,10 @@ resource "null_resource" "cluster" {
   }
   
   provisioner "local-exec" {
-    command = "echo  'Hello World!'"
+
+   inline = [
+      "sleep 60",
+      "echo  'Hello World!'"
+    ]
   }
 }
